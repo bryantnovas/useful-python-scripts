@@ -16,9 +16,8 @@ if(len(sys.argv) < 2):
 elif(os.path.exists(sys.argv[1]) == False):
   print('Invalid path please get the right path and try again')
   exit()
-# Verifies that user typed a patn and if the path exists
-    
-print(sys.argv[1])
+# Verifies that user typed a path and if the path exists
+
 for root, subfolders, filenames in os.walk(str(sys.argv[1])):
   for file in filenames:
     file_path = root + '/' + file
