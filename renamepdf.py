@@ -2,13 +2,13 @@
 # A simple script to rename pdf report cards based on student info
 
 import os, PyPDF2, re, sys
- 
-regex_text = r'(\w+, \w+\n |\w+, \w+ \w+\n |\w+, \w+\n \n|\w+, \w+ \w+\n \n)\(\d+\)'
-search_regex = re.compile(regex_text)
-# search for student info using regexes
+
+regex_text = r'\w+,.*?\(\d+\)'
+search_regex = re.compile(regex_text, re.DOTALL)
+# searches for student info using regexes
 
 count = 0
-# used to count the number of files changed
+# counts the number of files changed
 
 if(len(sys.argv) < 2):
   print(r'''usage: python3 renamepdf.py  '[path to folder] ' - renames all files in folder''')
@@ -18,7 +18,7 @@ elif(os.path.exists(sys.argv[1]) == False):
   exit()
 # Verifies that user typed a path and if the path exists
 
-for root, subfolders, filenames in os.walk(str(sys.argv[1])):
+for root, subfolders, filenames in os.walk(sys.argv[1]):
   for file in filenames:
     file_path = root + '/' + file
     get_pdf = open(file_path, 'rb')
